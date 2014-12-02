@@ -8,6 +8,10 @@ type Container struct {
 	Ports   []Port
 }
 
+func (c *Container) FullName() string {
+	return c.Image + ":" + c.Tag
+}
+
 type Port struct {
 	Host      int16
 	Container int16

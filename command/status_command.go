@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/codegangsta/cli"
+	"github.com/fsouza/go-dockerclient"
 )
 
 func NewStatusCommand() cli.Command {
@@ -25,7 +26,17 @@ func NewStatusCommand() cli.Command {
 	}
 }
 
-func execStatusCommandFunc(c *cli.Context, m Manifest) {
-	fmt.Println("Doing status stuff...")
-	fmt.Printf("Manifest: %+v\n", m)
+func execStatusCommandFunc(opts *CommandHandlerOptions) {
+	fullName := opts.Manifest.FullName()
+	var s []docker.APIContainers
+
+	containers, _ := opts.Client.ListContainers(docker.ListContainersOptions{})
+
+	for _, c := range containers {
+		if fullName == c.Image {
+			s = append(s, c)
+		}
+	}
+
+	fmt.Println(len(s))
 }
