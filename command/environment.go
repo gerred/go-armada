@@ -1,4 +1,4 @@
-package armada
+package command
 
 type Environment struct {
 	Hosts    []string

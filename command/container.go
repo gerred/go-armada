@@ -1,8 +1,9 @@
-package armada
+package command
 
 type Container struct {
 	Name    string
 	Image   string
+	Tag     string
 	EnvVars map[string]string `toml:"env_vars"`
 	Ports   []Port
 }
