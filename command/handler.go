@@ -46,12 +46,12 @@ func handleWithManifest(c *cli.Context, handler func(opts *CommandHandlerOptions
 	for envName, env := range manifest.Environments {
 		for _, host := range env.Hosts {
 			client, _ := newDockerClient(&DockerConnectionOptions{
-				Endpoint:  host,
-				TlsVerify: true,
-				CertPath:  "/Users/gdillon/.boot2docker/certs/boot2docker-vm/",
+				Endpoint:  host.Endpoint,
+				TlsVerify: host.TlsVerify,
+				CertPath:  host.CertPath,
 			})
 
-			handler(&CommandHandlerOptions{*c, manifest, *client, envName, host})
+			handler(&CommandHandlerOptions{*c, manifest, *client, envName, host.Endpoint})
 		}
 	}
 

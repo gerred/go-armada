@@ -21,7 +21,7 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
 			Name:  "dry-run, d",
-			Usage: "show the results of an action without performing it.",
+			Usage: "show the results of an action without performing it",
 		},
 	}
 	app.Run(os.Args)
